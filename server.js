@@ -1,5 +1,13 @@
 import express from "express";
+import {connect} from "./config.js";
 
-const api = express(8000, () => {
-    console.log("Server is running on port 8000");
-})
+connect();
+
+const api = express();
+
+api.use(express.json());
+
+api.listen(8000, () => {
+    console.log( "API corriendo en el puerto 8000" );
+});
+
