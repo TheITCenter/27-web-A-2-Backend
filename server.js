@@ -1,10 +1,14 @@
 import express from "express";
+import {connect} from "./config.js";
 import userRouter from "./routes/userRoutes.js";
 import authRouter from "./routes/authRoutes.js";
 import plataformRoutes from "./routes/plataformRoutes.js";
 import genderRouter from "./routes/genderRoutes.js";
 
-const api = express()
+connect();
+
+const api = express();
+
 api.use(express.json())
 
 api.listen(8000, () => {
