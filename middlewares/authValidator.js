@@ -1,5 +1,4 @@
 import jwt from 'jwt-simple'
-import { tokenKeyProvi } from '../controllers/authController.js'
 
 const authValidator = (req, res, next) => {
     const token = req.headers.authorization
@@ -11,7 +10,7 @@ const authValidator = (req, res, next) => {
     }
 
     try {
-        const payload = jwt.decode(token, tokenKeyProvi)
+        const payload = jwt.decode(token, process.env.SECRET_KEY)
 
         req.role = payload.role
 
