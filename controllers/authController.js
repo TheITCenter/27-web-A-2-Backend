@@ -2,8 +2,6 @@ import User from "../models/User.js";
 import bcrypt from "bcrypt"
 import jwt from "jwt-simple"
 
-const tokenKeyProvi = 'asdfadfa1234' //tokenKey provisional
-
 const register = async (req, res) => {
     try {
         const reqData = [
@@ -34,7 +32,7 @@ const register = async (req, res) => {
             email: newUser.email
         }
 
-        const token = jwt.encode(payload, tokenKeyProvi)
+        const token = jwt.encode(payload, process.env.SECRET_KEY)
 
         newUser.password = undefined
 
@@ -74,7 +72,7 @@ const login = async (req, res) => {
         if(isPassCorrect){
             const payload =  user
 
-            const token = jwt.encode(payload, tokenKeyProvi)
+            const token = jwt.encode(payload, process.env.SECRET_KEY)
 
             return res.status(200).json({
                 msg: 'Login success',
@@ -94,4 +92,4 @@ const login = async (req, res) => {
     }
 }
 
-export { register, login, tokenKeyProvi }
+export { register, login }
