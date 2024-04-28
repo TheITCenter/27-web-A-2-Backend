@@ -7,7 +7,7 @@ const genderRouter = express.Router()
 
 genderRouter.post('/', authValidator, isAdmin, createGender) //Only admin can create a gender
 
-genderRouter.get('/', authValidator, getAllGenders)
-genderRouter.get('/:name', authValidator, getGenderByName)
+genderRouter.get('/',  getAllGenders)
+genderRouter.get('/:name', getGenderByName)
 
 export default genderRouter
