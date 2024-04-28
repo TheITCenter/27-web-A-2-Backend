@@ -30,6 +30,14 @@ const gamesSchema = new mongoose.Schema({
         type: Int32,
         required: true,
         unique: true
+    },
+    updated: {
+      type: Date,
+      default: Date.now
+    },
+    isDeleted: {
+      type: Boolean,
+      default: false
     }
 })
 

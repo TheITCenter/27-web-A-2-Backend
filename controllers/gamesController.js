@@ -2,6 +2,7 @@ import Games from '../models/Games.js';
 import Plataform from '../models/Plataform.js';
 import Gender from '../models/Gender.js';
 
+// Create
 const createGame = async (req, res) => {
   try {
     /**
@@ -43,7 +44,7 @@ const createGame = async (req, res) => {
 
     const newGame = await Games.create(game);
 
-    return res.json(newGame);
+    return res.status(200).json(newGame);
   } catch (error) {
     res.status(500).json({
       msg: 'Error al crear Videojuego',
@@ -52,43 +53,79 @@ const createGame = async (req, res) => {
   }
 };
 
-const getBookById = async (req, res) => {
+// Read
+const getGameByName = async (req, res) => {
     try {
-      //buscar un libro por id
-      const book = await Book.findById(req.params.bookId).populate('authors');
+      const { name } = req.params
+      const game = await Games.findOne(name)/* .populate('authors'); */
   
-      if (!book) {
+      if (!game) {
         return res.status(404).json({
-          msg: 'Libro no encontrado',
+          msg: 'Juego no encontrado',
         });
       }
   
-      //responder ese libro
-      return res.json(book);
+      return res.json(game);
     } catch (error) {
       res.status(500).json({
-        msg: 'Error al buscar libro por id',
+        msg: 'Error al buscar Juego por id',
         error,
       });
     }
   };
   
-  const getAllBooks = async (req, res) => {
+const getAllGames = async (req, res) => {
     try {
-      const books = await Book.find({});
-      if (!books) {
+      const games = await Games.find();
+      if (!games) {
         return res.status(404).json({
-          msg: 'Libros no encontrados',
+          msg: 'Juegos no encontrados',
         });
       }
-      return res.json(books);
+      return res.json(games);
     } catch (error) {
       res.status(500).json({
-        msg: 'Error al buscar todos los libros',
+        msg: 'Error al buscar todos los juegos',
         error,
       });
     }
   };
-  
-  export { createGame, getBookById, getAllBooks };
+// Update
+const updateGameByName = async (req, res) => {
+  try {
+    const { name } = req.params
+    const updateGame = await Games.updateOne({
+      name_game: name
+    },
+    req.body
+    )
+    res.json(updateGame)
+  } catch (error) {
+    res.status(500).json({
+      msg: 'Error updating the game',
+      error
+    })
+  }
+}
+// Delete
+const softDeleteGame = async (req, res) => {
+  try {
+    const { name } = req.params
+    const detetGame = await Games.findOneAndUpdate(name,
+      {
+          isDeleted :true
+      },
+      {
+          new: true
+      });
+
+  res.status(200).json(detetGame);
+  } catch (error) {
+    res.status(500).json({
+      msg: 'Error deleting the game',
+      error
+    })
+  }
+}
+  export { createGame, getGameByName, getAllGames, updateGameByName, softDeleteGame };
 
