@@ -14,7 +14,7 @@ const gamesSchema = new mongoose.Schema({
         type: Date,
         requiered:true
     },
-    platform : [
+    plataform : [
         {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'Plataform',
