@@ -16,28 +16,45 @@ const gamesSchema = new mongoose.Schema({
     },
     plataform : [
         {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: 'Plataform',
+            type:[mongoose.Schema.Types.ObjectId],
+            ref: 'Plataform'
         },
-      ],
+    ],
     gender : [
         {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: 'Gender',
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Gender',
         },
-      ],
+    ],
     sku: {
         type: Int32,
         required: true,
         unique: true
     },
     updated: {
-      type: Date,
-      default: Date.now
+        type: Date,
+        default: Date.now
     },
     isDeleted: {
-      type: Boolean,
-      default: false
+        type: Boolean,
+        default: false
+    },
+    availableItems: {
+        type: Int32,
+        requiered: true
+    },
+    price: {
+        type: Float32Array,
+        requiered: true
+    },
+    /**image: { //jojojo aquí no sé como poner el tipo de archivo... n_n'
+        type: string
+    }*/
+    reviews: {
+        type: Text
+    },
+    requierements: {
+        type: Text
     }
 })
 
