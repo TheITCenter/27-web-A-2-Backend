@@ -1,7 +1,7 @@
 import express from 'express'
 import { createGame, getGameByName, getAllGames, updateGameByName, softDeleteGame } from '../controllers/gamesController.js'
 import { authValidator } from '../middlewares/authValidator.js'
-import { isAdmin } from '../middlewares/isAdmin'
+import { isAdmin } from '../middlewares/isAdmin.js'
 
 const gameRouter = express.Router()
 

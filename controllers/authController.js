@@ -4,21 +4,11 @@ import jwt from "jwt-simple"
 
 const register = async (req, res) => {
     try {
-        const reqData = [
-            'name',
-            'user_name',
-            'email',
-            'password'
-        ]
-
-        for (data of reqData) {
-            if (!req.body[data]) {
-                return res.status(400).json({
-                    msg: 'Mising Fields',
-                    error: `Missing Data ${data}`
-                })
-            }
-        }
+        if (!req.body.email || !req.body.password || !req.body.name || !req.body.user_name) {
+            return res.status(400).json({
+              msg: 'Correo, Email, Nombre, Contraseña fantantes',
+            });
+          }
 
         const newPass = await bcrypt.hash(req.body.password, 10)
 
@@ -42,6 +32,7 @@ const register = async (req, res) => {
             newUser
         })
     } catch (error) {
+        console.log (error)
         res.status(500).json({
             msg: 'Error make User',
             error
