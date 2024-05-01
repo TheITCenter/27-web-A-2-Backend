@@ -12,30 +12,38 @@ const createGame = async (req, res) => {
      */
     const { plataform, gender , game } = req.body;
 
-    if (!Array.isArray(plataform) || !Array.isArray(plataform) || !book) {
+    if (!Array.isArray(plataform) || !Array.isArray(gender) ) {
       return res.status(400).json({
         msg: 'Body incorrecto',
       });
     }
 
     const plataformPromises = plataform.map((elem) => {
-      return Plataform.create(elem);
+        return Plataform.findOneAndUpdate(
+            {name: elem},
+            {name: elem},
+            {upsert: true, new: true}
+        )
     });
-
+    
     const plataformModels = await Promise.all(plataformPromises);
 
     const plataformIds = plataformModels.map((model) => {
-      return model.id;
+      return model._id;
     });
 
     const genderPromises = gender.map((elem) => {
-        return Gender.create(elem);
+        return Gender.findOneAndUpdate(
+            {name_gender: elem},
+            {name_gender: elem},
+            {upsert: true, new: true}
+        )
       });  
 
     const genderModels = await Promise.all(genderPromises);
 
     const genderIds = genderModels.map((model) => {
-      return model.id;
+      return model._id;
     });
 
     game.gender = genderIds;
@@ -46,6 +54,7 @@ const createGame = async (req, res) => {
 
     return res.status(200).json(newGame);
   } catch (error) {
+    console.log(error)
     res.status(500).json({
       msg: 'Error al crear Videojuego',
       error,

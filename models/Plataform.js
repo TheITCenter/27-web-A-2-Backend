@@ -6,11 +6,6 @@ const plataformSchema = new mongoose.Schema({
         require: true,
         unique: true
     },
-    image: {
-        type: String,
-        require: true,
-        unique: true
-    },
     createdAt: {
         type: Date,
         default: Date.now,
