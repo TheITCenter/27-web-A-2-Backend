@@ -66,7 +66,8 @@ const createGame = async (req, res) => {
 const getGameByName = async (req, res) => {
     try {
       const { name } = req.params
-      const game = await Games.findOne(name)/* .populate('authors'); */
+      const game = await Games.findOne(
+        {name:name})/* .populate('authors'); */
   
       if (!game) {
         return res.status(404).json({
