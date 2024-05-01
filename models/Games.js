@@ -1,4 +1,4 @@
-import { Int32 } from "mongodb";
+import { Decimal128, Int32 } from "mongodb";
 import mongoose from "mongoose";
 
 const gamesSchema = new mongoose.Schema({
@@ -27,7 +27,7 @@ const gamesSchema = new mongoose.Schema({
         },
     ],
     sku: {
-        type: Int32,
+        type: Number,
         required: true,
         unique: true
     },
@@ -40,21 +40,21 @@ const gamesSchema = new mongoose.Schema({
         default: false
     },
     availableItems: {
-        type: Int32,
+        type: Number,
         requiered: true
     },
     price: {
-        type: Float32Array,
+        type: Decimal128,
         requiered: true
     },
     /**image: { //jojojo aquí no sé como poner el tipo de archivo... n_n'
         type: string
     }*/
     reviews: {
-        type: Text
+        type: String,
     },
     requierements: {
-        type: Text
+        type: String,
     }
 })
 

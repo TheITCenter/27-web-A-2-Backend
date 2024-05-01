@@ -16,6 +16,10 @@ api.listen(8000, () => {
     console.log("Server is running on port 8000");
 })
 
+api.get('/test',(req, res) =>{
+    res.send('Este es una prueba de conexion')
+})
+
 api.use('/auths', authRouter)
 api.use('/users', userRouter)
 api.use('/games', gameRouter)
