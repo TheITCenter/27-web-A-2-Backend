@@ -5,7 +5,8 @@ import { isAdmin } from '../middlewares/isAdmin.js'
 
 const gameRouter = express.Router()
 
-gameRouter.post('/', authValidator, isAdmin, createGame)
+gameRouter.post('/', createGame)
+//gameRouter.post('/', authValidator, isAdmin, createGame)
 gameRouter.get('/', getAllGames)
 
 gameRouter.get('/:name', getGameByName)

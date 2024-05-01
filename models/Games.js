@@ -47,9 +47,9 @@ const gamesSchema = new mongoose.Schema({
         type: Decimal128,
         requiered: true
     },
-    /**image: { //jojojo aquí no sé como poner el tipo de archivo... n_n'
-        type: string
-    }*/
+    image: {
+        type: String
+    },
     reviews: {
         type: String,
     },
