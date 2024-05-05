@@ -10,7 +10,8 @@ const createGame = async (req, res) => {
      * 2.- Registra Gerder
      * 2.- Registrar Games con esos authors ✅
      */
-    const { plataform, gender , game } = req.body;
+    const { plataform, gender, ...game } = req.body;
+
 
     if (!Array.isArray(plataform) || !Array.isArray(gender) ) {
       return res.status(400).json({
@@ -20,7 +21,6 @@ const createGame = async (req, res) => {
 
     const plataformPromises = plataform.map((elem) => {
         return Plataform.findOneAndUpdate(
-            {name: elem},
             {name: elem},
             {upsert: true, new: true}
         )
@@ -34,7 +34,6 @@ const createGame = async (req, res) => {
 
     const genderPromises = gender.map((elem) => {
         return Gender.findOneAndUpdate(
-            {name_gender: elem},
             {name_gender: elem},
             {upsert: true, new: true}
         )
