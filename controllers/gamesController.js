@@ -5,11 +5,6 @@ import Gender from '../models/Gender.js';
 // Create
 const createGame = async (req, res) => {
   try {
-    /**
-     * 1.- Registrar Plataform en DB ✅
-     * 2.- Registra Gerder
-     * 2.- Registrar Games con esos authors ✅
-     */
     const { plataform, gender , game } = req.body;
 
     if (!Array.isArray(plataform) || !Array.isArray(gender) ) {
