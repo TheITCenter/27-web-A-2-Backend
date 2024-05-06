@@ -1,7 +1,7 @@
 import { Decimal128, Int32 } from "mongodb";
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 
-const gamesSchema = new mongoose.Schema({
+const gamesSchema = Schema({
     name_game: {
         type: String,
         required: true,
@@ -16,13 +16,13 @@ const gamesSchema = new mongoose.Schema({
     },
     plataform : [
         {
-            type:[mongoose.Schema.Types.ObjectId],
+            type:[Schema.Types.ObjectId],
             ref: 'Plataform'
         },
     ],
     gender : [
         {
-            type: mongoose.Schema.Types.ObjectId,
+            type: Schema.Types.ObjectId,
             ref: 'Gender',
         },
     ],
@@ -58,4 +58,4 @@ const gamesSchema = new mongoose.Schema({
     }
 })
 
-export default mongoose.model('Games', gamesSchema)
+export default model('Games', gamesSchema)

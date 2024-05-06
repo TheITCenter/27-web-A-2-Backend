@@ -5,12 +5,14 @@ import authRouter from "./routes/authRoutes.js";
 import plataformRoutes from "./routes/plataformRoutes.js";
 import genderRouter from "./routes/genderRoutes.js";
 import gameRouter from "./routes/gameRoutes.js";
+import cors from "cors";
 
 connect();
 
 const api = express();
 
 api.use(express.json())
+api.use(cors());
 
 api.listen(8000, () => {
     console.log("Server is running on port 8000");

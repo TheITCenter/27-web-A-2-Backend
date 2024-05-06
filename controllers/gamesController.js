@@ -5,6 +5,11 @@ import Gender from '../models/Gender.js';
 // Create
 const createGame = async (req, res) => {
   try {
+    /**
+     * 1.- Registrar Plataform en DB ✅
+     * 2.- Registra Gerder
+     * 2.- Registrar Games con esos authors ✅
+     */
     const { plataform, gender , game } = req.body;
 
     if (!Array.isArray(plataform) || !Array.isArray(gender) ) {
@@ -15,7 +20,6 @@ const createGame = async (req, res) => {
 
     const plataformPromises = plataform.map((elem) => {
         return Plataform.findOneAndUpdate(
-            {name: elem},
             {name: elem},
             {upsert: true, new: true}
         )
@@ -29,7 +33,6 @@ const createGame = async (req, res) => {
 
     const genderPromises = gender.map((elem) => {
         return Gender.findOneAndUpdate(
-            {name_gender: elem},
             {name_gender: elem},
             {upsert: true, new: true}
         )
